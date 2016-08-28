@@ -1,0 +1,27 @@
+<div class="row" ng-controller="animalController">
+
+  <div class="row">
+    <div class="col-md-1 bottom-buffer"></div>
+    <div class="col-md-5 bottom-buffer">
+      <form id="animalChoice">
+        <select class="drop-down" ng-model="pickAnimal">
+        <option class="drop-down" ng-repeat="x in ranAnimals" value="{{x.type}}">{{x.type}}</option>
+        </select>
+        <button ng-click="ranAn()" class="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row content">
+    <div class="col-md-1 bottom-buffer"></div>
+    <div class="col-md-5 bottom-buffer">
+      <img class="pic" ng-src="{{animal.media.photos.photo[2].$t}}" />
+    </div>
+    <div class="col-md-5 bottom-buffer">
+      <h2>{{animal.name.$t}}</h2>
+      <p>{{animal.description.$t}}</p>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+</div>

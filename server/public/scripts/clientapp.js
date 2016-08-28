@@ -5,7 +5,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/animals', {
       templateUrl: '/views/partials/animals.html',
-      controller: 'animalsController'
+      controller: 'animalController'
     }).
     when('/favorites', {
       templateUrl: '/views/partials/favorites.html',
