@@ -1,11 +1,10 @@
-<div class="container">
+<div class="container" ng-controller="navController">
 
   <header class="page-header">
     <h1 class="title"><a class="ranimals" href="#home">R<em>animals</em></a></h1>
     <p class="address top-address">Matching random animals with random people since Sunday</p>
   </header>
 
-</div>
 <div id="navBar" class="row">
   <div class="col-md-6 buttons">
     <a class="links" href="#home" role="button">Home</a>
@@ -13,5 +12,7 @@
     <a class="links" href="#animals" role="button">Search for Critters</a>
   </div>
   <div class="col-md-2"></div>
-  <div class="col-md-3 count">Critter Count: {{count}}</div>
+  <div class="col-md-3 count">Critter Count: {{count[0].count}}</div>
+</div>
+
 </div>

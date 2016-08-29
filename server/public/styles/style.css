@@ -87,8 +87,13 @@ body{
 
 .pic{
   box-shadow: 10px 10px 100px slategrey;
+  margin-top: 15px;
 }
 
 .favorite-critters{
   list-style: none;
+}
+
+.each-animal{
+  padding-bottom: 10px;
 }

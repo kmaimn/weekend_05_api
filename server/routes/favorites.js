@@ -3,7 +3,7 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/weekend_05';
 
-router.get('/', function (req, res) {
+router.get('/favorite', function (req, res) {
 
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
@@ -23,7 +23,27 @@ router.get('/', function (req, res) {
   });
 });
 
-//started post request;
+router.get('/count', function (req, res) {
+
+  pg.connect(connectionString, function (err, client, done) {
+    if (err) {
+      res.sendStatus(500);
+    }
+
+    client.query('SELECT COUNT (*) FROM favorites;', function (err, result) {
+      done();
+
+      if (err) {
+        res.sendStatus(500);
+      }
+
+      console.log(result.rows);
+      res.send(result.rows);
+    });
+  });
+});
+
+//post request;
 router.post('/', function (req, res) {
 
   var favorite = req.body;

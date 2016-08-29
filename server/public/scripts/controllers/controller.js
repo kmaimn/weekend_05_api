@@ -69,7 +69,7 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
 
   $http({
     method: 'GET',
-    url: '/favorites'
+    url: '/favorites/favorite'
   }).then(function (response) {
     console.log('response object ', response);
     $scope.favorites = response.data;
@@ -81,5 +81,20 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
 //controller for the home screen;
 myApp.controller('homeController', ['$scope', '$http', function ($scope, $http) {
   console.log('homeController');
+
+}]);
+
+//controller for the navbar;
+myApp.controller('navController', ['$scope', '$http', function ($scope, $http) {
+  console.log('navController');
+
+  $http({
+    method: 'GET',
+    url: '/favorites/count'
+  }).then(function (response) {
+    console.log('response object ', response);
+    $scope.count = response.data;
+    console.log('count ', $scope.count[0].count);
+  });
 
 }]);
