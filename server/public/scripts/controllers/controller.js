@@ -41,26 +41,26 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
           });
   };
 
-  $scope.addFav =  function (){
+  $scope.addFav =  function (animalId, animalType, description, image, name) {
 
-    $scope.favorite = {
-      animalId: $scope.animal.id.$t,
-      animalType: $scope.animal.animal.$t,
-      description: $scope.animal.description.$t,
-      image: $scope.animal.media.photos.photo[2].$t,
-      name: $scope.animal.name.$t,
+    var favorite = {
+      animalId: animalId,
+      animalType: animalType,
+      description: description.substring(0, 100),
+      image: image,
+      name: name
     };
+    console.log(favorite);
 
     $http({
       method: 'POST',
       url: '/favorites',
-      data: 'favorite'
-    }).then(function (response){
+      data: favorite
+    }).then(function (response) {
       console.log('POST works!');
     });
 
   };
-
 
 }]);
 
@@ -70,7 +70,7 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
   $http({
     method: 'GET',
     url: '/favorites'
-  }).then(function (response){
+  }).then(function (response) {
     console.log('response object ', response);
     $scope.favorites = response.data;
     console.log('favorites ', $scope.favorites);

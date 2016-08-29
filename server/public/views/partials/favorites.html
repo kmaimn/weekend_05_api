@@ -5,8 +5,24 @@
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <h1>Favorite Critters!</h1>
-    <ul ng-repeat="favorite in favorites">
-      <li>{{favorite.animal_id}} {{favorite.name}}  {{favorite.image}}  {{favorite.description}}
+    <ul ng-repeat="favorite in favorites" class="favorite-critters">
+      <li>
+        <div class="row">
+          <!-- <div class="col-md-1 "></div> -->
+          <div class="col-md-2 ">
+            <h2>ID: {{favorite.animal_id}}</h2>
+          </div>
+          <div class="col-md-2 ">
+            <img class="pic" ng-src="{{favorite.image}}" />
+          </div>
+          <div class="col-md-6 ">
+            <h2>Name: {{favorite.name}}</h2>
+            <p>Descriptiopn: {{favorite.description}}</p>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+
+
       </li>
     </ul>
   </div>
