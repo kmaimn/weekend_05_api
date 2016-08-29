@@ -90,7 +90,19 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
     console.log('response object ', response);
     $scope.favorites = response.data;
     console.log('favorites ', $scope.favorites);
+    updateCount();
   });
+
+  function updateCount(){
+    $http({
+      method: 'GET',
+      url: '/favorites/count'
+    }).then(function (response) {
+      console.log('response object ', response);
+      $scope.count = response.data;
+      console.log('count 2', $scope.count[0].count);
+    });
+  }
 
 }]);
 
