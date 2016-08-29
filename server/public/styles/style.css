@@ -61,7 +61,7 @@ body{
 }
 
 .page-footer{
-  border-top: .5px solid #eee;
+  /*border-top: .5px solid #eee;*/
   margin: 0 73px 0 73px;
   text-align: right;
 }

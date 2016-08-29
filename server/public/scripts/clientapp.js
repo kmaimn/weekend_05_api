@@ -2,6 +2,7 @@ var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(['$routeProvider', function($routeProvider) {
 
+  //partials;
   $routeProvider.
     when('/animals', {
       templateUrl: '/public/views/partials/animals.html',

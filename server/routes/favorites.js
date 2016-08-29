@@ -3,6 +3,7 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/weekend_05';
 
+//GET request that will bring in all from database;
 router.get('/favorite', function (req, res) {
 
   pg.connect(connectionString, function (err, client, done) {
@@ -23,6 +24,7 @@ router.get('/favorite', function (req, res) {
   });
 });
 
+//GET request that will give total number of favorite critters;
 router.get('/count', function (req, res) {
 
   pg.connect(connectionString, function (err, client, done) {
@@ -68,5 +70,7 @@ router.post('/', function (req, res) {
     });
 
 });
+
+
 
 module.exports = router;

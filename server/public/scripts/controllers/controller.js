@@ -41,11 +41,13 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
           });
   };
 
+//function that will take in info and put into a object that will be sent to the server;
   $scope.addFav =  function (animalId, animalType, description, image, name) {
 
     var favorite = {
       animalId: animalId,
       animalType: animalType,
+      //used to limit the characters;
       description: description.substring(0, 100),
       image: image,
       name: name
@@ -59,11 +61,11 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
     }).then(function (response) {
       console.log('POST works!');
     });
-
   };
 
 }]);
 
+//fav controller will house the get request: where the info will show on the app;
 myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $http) {
   console.log('favoritesController');
 
@@ -78,23 +80,25 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
 
 }]);
 
-//controller for the home screen;
+//controller for the home screen; not sure if this is necessary..
 myApp.controller('homeController', ['$scope', '$http', function ($scope, $http) {
   console.log('homeController');
 
 }]);
 
-//controller for the navbar;
+//controller for the navbar; responsible for the critter count w/ diff GET request;
 myApp.controller('navController', ['$scope', '$http', function ($scope, $http) {
   console.log('navController');
 
-  $http({
-    method: 'GET',
-    url: '/favorites/count'
-  }).then(function (response) {
-    console.log('response object ', response);
-    $scope.count = response.data;
-    console.log('count ', $scope.count[0].count);
-  });
+  // function count(){
+    $http({
+      method: 'GET',
+      url: '/favorites/count'
+    }).then(function (response) {
+      console.log('response object ', response);
+      $scope.count = response.data;
+      console.log('count ', $scope.count[0].count);
+    });
+  // }
 
 }]);
