@@ -1,18 +1,23 @@
 var express = require('express');
 var app = express();
-var path = require('path');
 var bodyParser = require('body-parser');
+var path = require('path');
 
-app.set('port', (process.env.PORT || 3000));
+var favorites = require('./routes/favorites');
 
-app.get('/*', function (req, res){
-  //req.params[0] = because this is undefined, it points to index file;
-  console.log(req.params);
-  var file = req.params[0] || 'views/index.html';
-  //any requests that pass through the server will start from app.js and then go into public!
-  res.sendFile(path.join(__dirname, '/public', file));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use('/public', express.static(path.join(__dirname, './public')));
+
+app.use('favorites', favorites);
+
+app.get('/', function (req, res){
+  res.sendFile(path.join(__dirname, './public/views/index.html'));
 });
 
-app.listen(app.get('port'), function(){
+app.set('port', 3000);
+
+app.listen(process.env.PORT || app.get('port'), function(){
   console.log('Listening on port: ', app.get('port'));
 });

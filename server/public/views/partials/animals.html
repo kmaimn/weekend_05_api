@@ -5,9 +5,11 @@
     <div class="col-md-5 bottom-buffer">
       <form id="animalChoice">
         <select class="drop-down" ng-model="pickAnimal">
-        <option class="drop-down" ng-repeat="x in ranAnimals" value="{{x.type}}">{{x.type}}</option>
+        <option class="drop-down" ng-repeat="x in ranAnimals" value="{{x.value}}">{{x.type}}</option>
         </select>
         <button ng-click="ranAn()" class="submit">Submit</button>
+        <!-- add function once its defined -->
+        <button ng-click="count = count + 1" ng-init="count=0"" class="fav">Add to Favorites</button>
       </form>
     </div>
   </div>

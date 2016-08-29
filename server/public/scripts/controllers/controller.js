@@ -7,17 +7,17 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
   //set empty variable to store the random animal;
   $scope.pickAnimal = '';
 
-  //create an array with all the animal choices;
+  //create an array with all the animal choices with display and value;
   $scope.ranAnimals = [
-    { type: '(select one)' },
-    { type: 'barnyard' },
-    { type: 'bird' },
-    { type: 'cat' },
-    { type: 'dog' },
-    { type: 'horse' },
-    { type: 'pig' },
-    { type: 'reptile' },
-    { type: 'smallfurry' },
+    { type: '(select one)', value: '' },
+    { type: 'barnyard', value: 'barnyard' },
+    { type: 'bird', value: 'bird' },
+    { type: 'cat', value: 'cat' },
+    { type: 'dog', value: 'dog' },
+    { type: 'horse', value: 'horse' },
+    { type: 'pig', value: 'pig' },
+    { type: 'reptile', value: 'reptile' },
+    { type: 'smallfurry', value: 'smallfurry' },
 
   ];
 
@@ -40,10 +40,20 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
             $scope.animal = response.data.petfinder.pet;
           });
   };
+
 }]);
 
 myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $http) {
   console.log('favoritesController');
+
+  $http({
+    method: 'GET',
+    url: '/favorites'
+  }).then(function (response){
+    console.log('response object ', response);
+    $scope.favorites = response.data;
+    console.log('favorites ', $scope.favorites)
+  });
 
 }]);
 

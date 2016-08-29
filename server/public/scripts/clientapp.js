@@ -4,15 +4,15 @@ myApp.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.
     when('/animals', {
-      templateUrl: '/views/partials/animals.html',
+      templateUrl: '/public/views/partials/animals.html',
       controller: 'animalController'
     }).
     when('/favorites', {
-      templateUrl: '/views/partials/favorites.html',
+      templateUrl: '/public/views/partials/favorites.html',
       controller: 'favoritesController'
     }).
     when('/home', {
-      templateUrl: '/views/partials/home.html',
+      templateUrl: '/public/views/partials/home.html',
       controller: 'homeController'
     }).
     otherwise({

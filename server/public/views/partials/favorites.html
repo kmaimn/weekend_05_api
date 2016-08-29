@@ -3,7 +3,12 @@
 </div>
 <div class="row content">
   <div class="col-md-1"></div>
-  <div class="col-md-5">.col-md-5</div>
-  <div class="col-md-5">.col-md-5</div>
+  <div class="col-md-10">
+    <h1>Favorite Critters!</h1>
+    <ul ng-repeat="favorite in favorites">
+      <li>{{favorite.animal_id}} {{favorite.name}}  {{favorite.image}}  {{favorite.description}}
+      </li>
+    </ul>
+  </div>
   <div class="col-md-1"></div>
 </div>
