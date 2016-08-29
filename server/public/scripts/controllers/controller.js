@@ -10,16 +10,18 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
   //create an array with all the animal choices with display and value;
   $scope.ranAnimals = [
     { type: '(select one)', value: '' },
-    { type: 'barnyard', value: 'barnyard' },
-    { type: 'bird', value: 'bird' },
-    { type: 'cat', value: 'cat' },
-    { type: 'dog', value: 'dog' },
-    { type: 'horse', value: 'horse' },
-    { type: 'pig', value: 'pig' },
-    { type: 'reptile', value: 'reptile' },
-    { type: 'smallfurry', value: 'smallfurry' },
+    { type: 'Barn Animals', value: 'barnyard' },
+    { type: 'Bird', value: 'bird' },
+    { type: 'Cat', value: 'cat' },
+    { type: 'Dog', value: 'dog' },
+    { type: 'Horse', value: 'horse' },
+    { type: 'Pig', value: 'pig' },
+    { type: 'Reptile', value: 'reptile' },
+    { type: 'Small & Furry', value: 'smallfurry' },
 
   ];
+  //run the update fav count function;
+  updateCount();
 
   //define function that will include random animal choice and query items;
   $scope.ranAn = function () {
@@ -48,7 +50,7 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
       animalId: animalId,
       animalType: animalType,
       //used to limit the characters;
-      description: description.substring(0, 100),
+      description: description.substring(0, 99),
       image: image,
       name: name
     };
@@ -59,10 +61,22 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
       url: '/favorites',
       data: favorite
     }).then(function (response) {
+      //update count here, doesn't update count on POST... will console the correct amount...
+      updateCount();
       console.log('POST works!');
     });
   };
 
+  function updateCount(){
+    $http({
+      method: 'GET',
+      url: '/favorites/count'
+    }).then(function (response) {
+      console.log('response object ', response);
+      $scope.count = response.data;
+      console.log('count 2', $scope.count[0].count);
+    });
+  }
 }]);
 
 //fav controller will house the get request: where the info will show on the app;
@@ -83,22 +97,5 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
 //controller for the home screen; not sure if this is necessary..
 myApp.controller('homeController', ['$scope', '$http', function ($scope, $http) {
   console.log('homeController');
-
-}]);
-
-//controller for the navbar; responsible for the critter count w/ diff GET request;
-myApp.controller('navController', ['$scope', '$http', function ($scope, $http) {
-  console.log('navController');
-
-  // function count(){
-    $http({
-      method: 'GET',
-      url: '/favorites/count'
-    }).then(function (response) {
-      console.log('response object ', response);
-      $scope.count = response.data;
-      console.log('count ', $scope.count[0].count);
-    });
-  // }
 
 }]);
