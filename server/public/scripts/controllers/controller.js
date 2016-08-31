@@ -1,4 +1,4 @@
-myApp.controller('animalController', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('animalController', ['$scope', '$http', 'DataFactory', function ($scope, $http, DataFactory) {
   console.log('animalController');
 
   var key = '5c3c1a09b32292305d0d095f9675078f';
@@ -20,8 +20,18 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
     { type: 'Small & Furry', value: 'smallfurry' },
 
   ];
+
+  $scope.dataFactory = DataFactory;
+
+  if($scope.dataFactory.animalData() === undefined){
+    console.log('there is nothing here, go get it.');
+    $scope.dataFactory.counter().then(function(){
+      $scope.count = $scope.dataFactory.counter();
+      console.log('this is what we get from the DF:', $scope.dataFactory.counter());
+    })
+  }
   //run the update fav count function;
-  updateCount();
+  // updateCount();
 
   //define function that will include random animal choice and query items;
   $scope.ranAn = function () {
@@ -67,16 +77,16 @@ myApp.controller('animalController', ['$scope', '$http', function ($scope, $http
     });
   };
 
-  function updateCount(){
-    $http({
-      method: 'GET',
-      url: '/favorites/count'
-    }).then(function (response) {
-      console.log('response object ', response);
-      $scope.count = response.data;
-      console.log('count 2', $scope.count[0].count);
-    });
-  }
+  // function updateCount(){
+  //   $http({
+  //     method: 'GET',
+  //     url: '/favorites/count'
+  //   }).then(function (response) {
+  //     console.log('response object ', response);
+  //     $scope.count = response.data;
+  //     console.log('count 2', $scope.count[0].count);
+  //   });
+  // }
 }]);
 
 //fav controller will house the get request: where the info will show on the app;
@@ -104,6 +114,16 @@ myApp.controller('favoritesController', ['$scope', '$http', function ($scope, $h
     });
   }
 
+  $scope.delete = function(){
+    $http({
+      method: 'DELETE',
+      url: '/favorites'
+    }).then(function (response) {
+      console.log('response object ', response);
+      $scope.count = response.data;
+      console.log('count 2', $scope.count[0].count);
+    });
+  }
 }]);
 
 //controller for the home screen; not sure if this is necessary..
