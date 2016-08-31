@@ -49,7 +49,7 @@ router.get('/count', function (req, res) {
 router.post('/', function (req, res) {
 
   var favorite = req.body;
-  console.log(favorite);
+  console.log("Favorite", favorite);
 
   pg.connect(connectionString, function (err, client, done) {
     if (err) {
