@@ -14,7 +14,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     }).
     when('/home', {
       templateUrl: '/public/views/partials/home.html',
-      controller: 'homeController'
+      controller: 'animalController'
     }).
     otherwise({
       redirectTo: "/home"

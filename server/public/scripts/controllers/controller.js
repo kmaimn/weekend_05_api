@@ -39,6 +39,7 @@ myApp.controller('animalController', ['$scope', '$http', 'DataFactory', function
 
     ];
 
+    //scope in DF;
     $scope.dataFactory = DataFactory;
 
     //define function that will include random animal choice and query items;
@@ -72,16 +73,36 @@ myApp.controller('animalController', ['$scope', '$http', 'DataFactory', function
             image: image,
             name: name
         };
-        console.log(favorite);
 
-        $scope.dataFactory.postFav(favorite).then(function(res){
-          $scope.count = $scope.dataFactory.counter();
+        //post information to the server via DF;
+        $scope.dataFactory.postFav(favorite).then(function(response){
+          console.log('this was sent to the server: ', favorite)
 
-        })
-
-    };
-
+          //gets count of favorite animals on animal add
+          if ($scope.dataFactory.animalData() === undefined) {
+              console.log('there is nothing here, go get it.');
+              $scope.dataFactory.counter().then(function(response) {
+                  $scope.count = $scope.dataFactory.animalData();
+                  console.log('this is what we get from the DF: ', response);
+              });
+          } else {
+            $scope.dataFactory.counter().then(function(response) {
+                $scope.count = $scope.dataFactory.animalData();              console.log("Count:", $scope.count);
+          });
+        }
+    });
+  }
+    //shows count on load;
+    if ($scope.dataFactory.animalData() === undefined) {
+        console.log('update count please');
+        $scope.dataFactory.counter().then(function(response) {
+            $scope.count = $scope.dataFactory.animalData();
+        });
+    } else {
+        $scope.count = $scope.dataFactory.animalData();
+    }
 }]);
+
 
 //fav controller will house the get request: where the info will show on the app;
 myApp.controller('favoritesController', ['$scope', '$http', 'DataFactory', function($scope, $http, DataFactory) {
@@ -89,42 +110,27 @@ myApp.controller('favoritesController', ['$scope', '$http', 'DataFactory', funct
 
     $scope.dataFactory = DataFactory;
 
-    if ($scope.dataFactory.favorites() === undefined) {
+    //shows count on load;
+    if ($scope.dataFactory.animalData() === undefined) {
+        console.log('update count please');
+        $scope.dataFactory.counter().then(function(response) {
+            $scope.count = $scope.dataFactory.animalData();
+            console.log('this is what we get from the DF: ', $scope.dataFactory.animalData());
+        });
+    } else {
+        $scope.count = $scope.dataFactory.animalData();
+        console.log('$scope.count', $scope.count);
+    }
+
+    //gets favorite animals from the DF
+      if ($scope.dataFactory.favoriteData() === undefined) {
         console.log('there is nothing here, go get it.');
-        $scope.dataFactory.favoriteData().then(function(response) {
-            $scope.favorites = response;
-            console.log('this is what we get from the DF: ', response);
+        $scope.dataFactory.favorites().then(function(response) {
+            $scope.favorites = $scope.dataFactory.favoriteData();
         });
     } else {
         $scope.favorites = $scope.dataFactory.favoriteData();
-    }
-
-    $scope.delete = function() {
-        $http({
-            method: 'DELETE',
-            url: '/favorites'
-        }).then(function(response) {
-            console.log('response object ', response);
-            $scope.count = response.data;
-            console.log('count 2', $scope.count[0].count);
-        });
-    };
-}]);
-
-//controller for the home screen; not sure if this is necessary..
-myApp.controller('homeController', ['$scope', '$http', 'DataFactory', function($scope, $http, DataFactory) {
-    console.log('homeController');
-
-        $scope.dataFactory = DataFactory;
-        $scope.count = 0;
-    if ($scope.dataFactory.animalData() === undefined) {
-        console.log('there is nothing here, go get it.');
-        $scope.dataFactory.counter().then(function(response) {
-            $scope.count = response;
-            console.log('this is what we get from the DF: ', response);
-        });
-    } else {
-        $scope.count = $scope.dataFactory.counter();
+        console.log("Count", $scope.count);
     }
 
 }]);

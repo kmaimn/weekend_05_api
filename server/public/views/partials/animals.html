@@ -10,7 +10,6 @@
         <button ng-click="ranAn()" class="submit">Submit</button>
         <button ng-click="addFav(animal.id.$t, animal.animal.$t, animal.description.$t, animal.media.photos.photo[1].$t, animal.name.$t)" class="fav">Add to Favorites</button>
       </form>
-      <!-- <h2>Critter Count: {{count[0].count}}</h2> -->
     </div>
   </div>
 
@@ -20,6 +19,7 @@
       <img class="pic" ng-src="{{animal.media.photos.photo[2].$t}}" />
     </div>
     <div class="col-md-5 bottom-buffer">
+      <h2 class="critterCount" ng-model"count">Critter Count: {{count[0].count}}</h2>
       <h2>{{animal.name.$t}}</h2>
       <p>{{animal.description.$t}}</p>
     </div>
